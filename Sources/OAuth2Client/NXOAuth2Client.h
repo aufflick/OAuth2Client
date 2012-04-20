@@ -33,11 +33,13 @@ extern NSString * const NXOAuth2ClientConnectionContextTokenRefresh;
 
 @interface NXOAuth2Client : NSObject <NXOAuth2ConnectionDelegate> {
 @protected
+    BOOL authenticating;
 	BOOL persistent;
 
 	NSString	*clientId;
 	NSString	*clientSecret;
 	
+    NSSet       *desiredScope;
 	NSString	*userAgent;
 	
 	// server information
@@ -54,9 +56,12 @@ extern NSString * const NXOAuth2ClientConnectionContextTokenRefresh;
 	NSObject<NXOAuth2ClientDelegate>*	delegate;	// assigned
 }
 
+@property (nonatomic, readonly, getter = isAuthenticating) BOOL authenticating;
+
 @property (nonatomic, copy, readonly) NSString *clientId;
 @property (nonatomic, copy, readonly) NSString *clientSecret;
 
+@property (nonatomic, copy) NSSet *desiredScope;
 @property (nonatomic, copy) NSString *userAgent;
 
 @property (nonatomic, retain) NXOAuth2AccessToken	*accessToken;
